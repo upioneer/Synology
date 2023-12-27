@@ -38,7 +38,7 @@ $bootTime = Measure-Command {
     Write-Host "Confirming device ping response. Please wait..." -ForegroundColor Yellow
     do {
       Start-Sleep -Seconds 5
-    } until(Test-NetConnection $targetIPAddress | ? {$_.PingSucceeded })
+    } until(Test-NetConnection $ipAddress | ? {$_.PingSucceeded })
     $secs = $bootTime.Seconds
     Write-Host
     Write-Host "WOL to availability took $secs seconds" -ForegroundColor Magenta

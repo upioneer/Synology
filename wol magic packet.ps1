@@ -6,7 +6,7 @@
 $macAddress = "00:11:22:AA:BB:CC"
 $ipAddress = "192.168.1.1"
 
-if ($macAddress -like "*:*") {
+if ($macAddress -like "*-*") {
     Write-Host 'Formatting MAC address...' -ForegroundColor Magenta
     $macAddress = $macAddress -replace "-", ":"
 }

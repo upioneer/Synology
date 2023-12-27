@@ -1,6 +1,10 @@
 ﻿<#
     Replace the IP and MAC addresses with that of your device
     Script will check and report when the device is online
+
+    TO DO
+        - add time out to ping test
+        - add visual cue while waiting for ping response
 #>
 
 $macAddress = "00:11:22:AA:BB:CC"
@@ -33,12 +37,12 @@ $udpClient.Send($magicPacket, $magicPacket.Length)
 # Close UDP client
 $udpClient.Close()
 
-# Confirm avialability and report boot time
+# Confirm availability and report boot time
 $bootTime = Measure-Command {
     Write-Host "Confirming device ping response. Please wait..." -ForegroundColor Yellow
     do {
       Start-Sleep -Seconds 5
-    } until(Test-NetConnection $ipAddress | ? {$_.PingSucceeded })
+    } until(Test-NetConnection $ipAddress | ? {$_.PingSucceeded})
     $mins = $bootTime.Minutes
     $secs = $bootTime.Seconds
     Write-Host

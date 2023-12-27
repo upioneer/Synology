@@ -39,7 +39,8 @@ $bootTime = Measure-Command {
     do {
       Start-Sleep -Seconds 5
     } until(Test-NetConnection $ipAddress | ? {$_.PingSucceeded })
+    $mins = $bootTime.Minutes
     $secs = $bootTime.Seconds
     Write-Host
-    Write-Host "WOL to availability took $secs seconds" -ForegroundColor Magenta
+    Write-Host "WOL to availability took $mins mins $secs seconds" -ForegroundColor Magenta
 }

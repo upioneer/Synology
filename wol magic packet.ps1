@@ -34,10 +34,9 @@ foreach ($port in $ports) {
     $udpClient = New-Object System.Net.Sockets.UdpClient
 
     Write-Host
-    Write-Host "Sending magic packet to:"
-    Write-Host $ipAddress -ForegroundColor Green
-    Write-Host $OGmacAddress -ForegroundColor Green
-    Write-Host "Port $port"
+    Write-Host "Sending magic packet to:" -ForegroundColor Gray
+    Write-Host "IP:  $ipAddress`:$port"
+    Write-Host "MAC: $OGmacAddress"
 
     $udpClient.Connect(([System.Net.IPAddress]::Broadcast), $port)
     $udpClient.Send($magicPacket, $magicPacket.Length) | Out-Null

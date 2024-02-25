@@ -11,7 +11,8 @@
 #################################
 $macAddress = "00:11:22:AA:BB:CC"
 $ipAddress = "192.168.1.1"
-$timeout = New-TimeSpan -Minutes 5
+
+$timeout = New-TimeSpan -Minutes 10
 #################################
 
 $OGmacAddress = $macAddress
@@ -20,34 +21,35 @@ if ($macAddress -like "*-*") {
     $macAddress = $macAddress -replace "-", ":"
 }
 
-# Convert MAC address to bytes
 $macBytes = $macAddress -split ':' | ForEach-Object { [byte]('0x' + $_) }
 
-# Create magic packet
 $magicPacket = (,0xFF * 6) + ($macBytes * 16)
 
-# Create UDP client
-$udpClient = New-Object System.Net.Sockets.UdpClient
+$ports = @(
+'7',
+'9'
+)
 
-Write-Host "Sending magic packet to:"
-Write-Host $ipAddress -ForegroundColor Green
-Write-Host $OGmacAddress -ForegroundColor Green
+foreach ($port in $ports) {
+    $udpClient = New-Object System.Net.Sockets.UdpClient
 
-# Set the broadcast address and port
-$udpClient.Connect(([System.Net.IPAddress]::Broadcast), 7)
+    Write-Host
+    Write-Host "Sending magic packet to:"
+    Write-Host $ipAddress -ForegroundColor Green
+    Write-Host $OGmacAddress -ForegroundColor Green
+    Write-Host "Port $port"
 
-# Send magic packet
-$udpClient.Send($magicPacket, $magicPacket.Length)
+    $udpClient.Connect(([System.Net.IPAddress]::Broadcast), $port)
+    $udpClient.Send($magicPacket, $magicPacket.Length) | Out-Null
+    $udpClient.Close()
+}
 
-# Close UDP client
-$udpClient.Close()
-
-# Confirm availability and report boot time
 $startTime = Get-Date
 $bootTime = Measure-Command {
+    write-host
     Write-Host "Confirming device ping response. Please wait..."
     do {
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 10
         $elapsedTime = (Get-Date) - $startTime
     } until ((Test-NetConnection $ipAddress | ? {$_.PingSucceeded}) -or ($elapsedTime -ge $timeout))
 

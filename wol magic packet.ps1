@@ -2,9 +2,6 @@
     Replace the IP and MAC addresses with that of your device
     Script will check and report when the device is online
     Timeout is set to 5 minutes but please adjust according to your needs
-
-    TO DO
-        - add visual cue while waiting for ping response
 #>
 
 ####   SET VARIABLES BELOW   ####
@@ -13,6 +10,7 @@ $macAddress = "00:11:22:AA:BB:CC"
 $ipAddress = "192.168.1.1"
 
 $timeout = New-TimeSpan -Minutes 10
+$sleep = 10
 #################################
 
 $OGmacAddress = $macAddress
@@ -48,8 +46,9 @@ $bootTime = Measure-Command {
     write-host
     Write-Host "Confirming device ping response. Please wait..."
     do {
-        Start-Sleep -Seconds 10
+        Start-Sleep -Seconds $sleep
         $elapsedTime = (Get-Date) - $startTime
+        Write-Progress -Activity "Waiting for ping response" -PercentComplete ($elapsedTime.TotalSeconds / $timeout.TotalSeconds * 100)
     } until ((Test-NetConnection $ipAddress | ? {$_.PingSucceeded}) -or ($elapsedTime -ge $timeout))
 
     $mins = $bootTime.Minutes

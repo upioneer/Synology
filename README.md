@@ -18,14 +18,3 @@ This script was developed and tested against a Synology DS418
 ## Images
 
 ![DS923+](https://www.synology.com/img/products/detail/DS923plus/heading.png)
-## References
-
-[Flash Download Tool](https://www.espressif.com.cn/sites/default/files/tools/flash_download_tool_3.9.5_0.zip)
-
-[Firmware](https://github.com/Xinyuan-LilyGO/T-Display-S3/blob/main/firmware/firmware_no_touch.bin)
-
-[T-Display S3 GitHub repo](https://github.com/Xinyuan-LilyGO/T-Display-S3)
-
-[T-Display S3 FAQ](https://github.com/Xinyuan-LilyGO/T-Display-S3?tab=readme-ov-file#9%EF%B8%8F%E2%83%A3-faq)
-
-[LilyGo YouTube](https://www.youtube.com/@LILYGO)

@@ -9,12 +9,12 @@ If you need to send a magic packet to your Synology NAS device to wake it up rem
 
 - Save, run, have a Coke and a smile
 
-This script was developed and tested against a Synology DS418
+Please consider this script was developed and tested against a Synology DS418. 
+
+## 
+
+![DS923+](https://www.synology.com/img/products/detail/DS923plus/heading.png)
+
 ## Authors
 
 [@upioneer](https://www.github.com/upioneer)
-
-
-## Images
-
-![DS923+](https://www.synology.com/img/products/detail/DS923plus/heading.png)

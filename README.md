@@ -1,15 +1,20 @@
 
 # Synology Wake On LAN (WOL)
 
-If you need to send a magic packet to your Synology NAS device to wake it up remotely, this will help accomplish that. In addition, a system tray balloon notification will alert you when the NAS comes online and display a measurement of the time taken to boot. This script targets ports 7 and 9, and the ports array is easily serviceable if additional ports are required.
+This PowerShell script is designed to send a Wake-on-LAN (WOL) magic packet to a Synology NAS device and check when the device comes online. The script sends the WOL packet to the device's IP and MAC address then waits for a ping response to confirm the device's availability
 
-- Replace the IP with that of your Synology NAS
+## Features
+- **Configurable IP and MAC Address**: Easily replace the placeholder IP and MAC addresses with those of your device
+- **Adjustable Timeout**: Set a custom timeout duration to wait for the device to respond
+- **Progress Monitoring**: Displays progress while waiting for the device to respond
+- **Notification**: Provides a Windows notification once the device is confirmed online
 
-- Replace the MAC address with that of your Synology NAS
+## Configuration
+1. **Set Variables**: Replace the placeholder values for `$macAddress` and `$ipAddress` with the actual MAC and IP addresses of your device
+2. **Adjust Timeout**: Modify the `$timeout` variable to set the duration the script waits for the device to come online (default is 10 minutes)
+3. **Set Sleep Interval**: Adjust the `$sleep` variable to change the interval between ping attempts (default is 10 seconds)
 
-- Save, run, have a Coke and a smile
-
-Please consider this script was developed and tested against a Synology DS418. 
+Please consider this script was developed and tested against the Synology DS418 only.
 
 ## 
 
